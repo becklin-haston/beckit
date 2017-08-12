@@ -1,6 +1,7 @@
 import praw
 import os
 
+go = "go"
 reddit = praw.Reddit(client_id="SsZW8NMLOD5qvg", client_secret="Pm4_MfJ_DMugRRDiEryG48CJbak", user_agent="Beckit: Beck's personal Reddit client")
 
 learnpython = "learnpython"
@@ -14,29 +15,24 @@ subreddit = reddit.subreddit(subreddit_name)
 
 subreddit_top_10_posts = subreddit.hot(limit=subreddit_limit)
 
+submissions = []
+
 for submission in subreddit_top_10_posts:
-    print(submission.title)
+    submissions.append(submission)
 
 
 
-
-
-'''
 g = "go"
 
 i = str(input("Input:"))
 
 while i == "go":
+    for index, submission in enumerate(submissions):
+        print(str(index) + " ------- " + str(submission.title))
 
-    for submission in reddit.subreddit('learnpython').hot(limit=10):
-        print(submission.title)
-
-    i = str(input("Next?"))
-
-    if i == "go":
-        os.system("clear")
-'''
-
+    i = input("again?")
+    os.system("clear")
+     
 
 
 
