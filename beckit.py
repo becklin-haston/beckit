@@ -30,9 +30,13 @@ while i == "go":
     for index, submission in enumerate(submissions):
         print(str(index) + " ------- " + str(submission.title))
 
-    i = input("again?")
-    os.system("clear")
-     
+    i = input("Which submission would you like to read?")
+    for comment in submissions[i].comments:
+        print(comment.body)
+        print("\n\nEND_COMMENT\n\n")
+
+    i = input("go?")
+    os.system("clear") 
 
 
 
