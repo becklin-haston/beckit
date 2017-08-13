@@ -7,9 +7,13 @@ reddit = praw.Reddit(client_id="SsZW8NMLOD5qvg", client_secret="Pm4_MfJ_DMugRRDi
 learnpython = "learnpython"
 
 
-subreddit_name = input("Which subreddit would you like to go to?")
+#subreddit_name = input("Which subreddit would you like to go to?")
 
-subreddit_limit = input("How many links do you want to display?")
+#subreddit_limit = input("How many links do you want to display?")
+
+subreddit_name = "learnpython"
+
+subreddit_limit = 10
 
 subreddit = reddit.subreddit(subreddit_name)
 
@@ -20,22 +24,34 @@ submissions = []
 for submission in subreddit_top_10_posts:
     submissions.append(submission)
 
-
-
-g = "go"
-
-i = str(input("Input:"))
-
-while i == "go":
+while True:
     for index, submission in enumerate(submissions):
         print(str(index) + " ------- " + str(submission.title))
 
-    i = input("Which submission would you like to read?")
-    for comment in submissions[i].comments:
-        print(comment.body)
-        print("\n\nEND_COMMENT\n\n")
+    comments = submissions[1].comments
 
-    i = input("go?")
+    print("The length of the comments list is:" + str(len(comments)))
+    print(type(comments))
+    #print([comment.body + "\n\nEND_COMMENT\n\n" for comment in comments[0:2]])
+    for comment in comments[0:2]:
+        print(comment.body)
+        print("\n\n")
+        print("END_COMMENT")
+        print("\n\n")
+
+    i = input("Next page?")
+    
+    if i == "y":
+        os.system("clear")
+        #print([comment.body + "\n\nEND_COMMENT\n\n" for comment in comments[2:4]])
+        for comment in comments[2:4]:
+            print(comment.body)
+            print("\n\n")
+            print("END_COMMENT")
+            print("\n\n")
+
+
+    
     os.system("clear") 
 
 
