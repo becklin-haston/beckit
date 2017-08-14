@@ -11,7 +11,7 @@ learnpython = "learnpython"
 
 #subreddit_limit = input("How many links do you want to display?")
 
-subreddit_name = "learnpython"
+subreddit_name = "askreddit"
 
 subreddit_limit = 10
 
@@ -30,29 +30,24 @@ while True:
 
     comments = submissions[1].comments
 
-    print("The length of the comments list is:" + str(len(comments)))
-    print(type(comments))
-    #print([comment.body + "\n\nEND_COMMENT\n\n" for comment in comments[0:2]])
-    for comment in comments[0:2]:
-        print(comment.body)
-        print("\n\n")
-        print("END_COMMENT")
-        print("\n\n")
-
-    i = input("Next page?")
+    print("The length of the comments list is:" + str(len(comments)) + "\n\n")
     
-    if i == "y":
-        os.system("clear")
-        #print([comment.body + "\n\nEND_COMMENT\n\n" for comment in comments[2:4]])
-        for comment in comments[2:4]:
+    y = "y"
+    index = 0
+    while index < len(comments) - 2:
+        for comment in comments[index:index + 2]:
             print(comment.body)
-            print("\n\n")
-            print("END_COMMENT")
-            print("\n\n")
+            print("\nEND_COMMENT\n")
 
+        i = input("Next page?")
+        if i == y:
+            index = index + 2
+            os.system("clear")
+    
+    
 
     
-    os.system("clear") 
+ 
 
 
 
