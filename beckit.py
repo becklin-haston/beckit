@@ -1,9 +1,20 @@
 import praw
 import os
 
+def truncate_comment_body(body):
+    if len(body) >= 80:
+        return body[0:79] + "..."
+    else:
+        return body
+
+def truncate_submission_title(title):
+    if len(title) >= 80:
+        return title[0:79] + "..."
+    else:
+        return title
+
+
 reddit = praw.Reddit(client_id="SsZW8NMLOD5qvg", client_secret="Pm4_MfJ_DMugRRDiEryG48CJbak", user_agent="Beckit: Beck's personal Reddit client")
-
-
 
 subreddit_name = input("Which subreddit would you like to go to?")
 
@@ -18,11 +29,15 @@ submissions = []
 for submission in subreddit_top_10_posts:
     submissions.append(submission)
 
+os.system("clear")
 while True:
     for index, submission in enumerate(submissions):
-        print(str(index) + " ------- " + str(submission.title))
+        print(str(index) + " ------- " + str(truncate_submission_title(submission.title)))
 
     i = int(input("Which thread would you like to see?"))
+    print("Topic: " + submissions[i].title + "\n\n")
+    if submissions[i].selftext_html:
+        print(submissions[i].selftext.html) 
     comments = submissions[i].comments
     print("There are " + str(len(comments)) + " comments in this thread.\n\n")
     
@@ -34,7 +49,7 @@ while True:
             #print(type(comment))
             #print(comment.__dict__)
             print("Comment by " + comment.author.name + ":\n")            
-            print(comment.body)
+            print(truncate_comment_body(comment.body))
             print("\nEND_COMMENT\n")
 
         n = "n"
