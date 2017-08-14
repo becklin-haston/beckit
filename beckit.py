@@ -1,17 +1,11 @@
 import praw
 import os
 
-go = "go"
 reddit = praw.Reddit(client_id="SsZW8NMLOD5qvg", client_secret="Pm4_MfJ_DMugRRDiEryG48CJbak", user_agent="Beckit: Beck's personal Reddit client")
 
-learnpython = "learnpython"
 
 
-#subreddit_name = input("Which subreddit would you like to go to?")
-
-#subreddit_limit = input("How many links do you want to display?")
-
-subreddit_name = "askreddit"
+subreddit_name = input("Which subreddit would you like to go to?")
 
 subreddit_limit = 10
 
@@ -28,19 +22,23 @@ while True:
     for index, submission in enumerate(submissions):
         print(str(index) + " ------- " + str(submission.title))
 
-    comments = submissions[1].comments
-
-    print("The length of the comments list is:" + str(len(comments)) + "\n\n")
+    i = int(input("Which thread would you like to see?"))
+    comments = submissions[i].comments
+    print("There are " + str(len(comments)) + " comments in this thread.\n\n")
     
     y = "y"
     index = 0
     while index < len(comments) - 2:
+        print("Topic: " + submissions[i].title + "\n\n")
         for comment in comments[index:index + 2]:
+            #print(type(comment))
+            #print(comment.__dict__)
+            print("Comment by " + comment.author.name + ":\n")            
             print(comment.body)
             print("\nEND_COMMENT\n")
 
-        i = input("Next page?")
-        if i == y:
+        go_next = input("Next page?")
+        if go_next == y:
             index = index + 2
             os.system("clear")
     
