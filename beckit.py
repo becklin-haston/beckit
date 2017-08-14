@@ -37,10 +37,17 @@ while True:
             print(comment.body)
             print("\nEND_COMMENT\n")
 
-        go_next = input("Next page?")
-        if go_next == y:
+        n = "n"
+        p = "p"
+
+        user_input = input(">>")
+        
+        if user_input == n:
             index = index + 2
-            os.system("clear")
+        elif user_input == p:
+            index = index - 2
+        
+        os.system("clear")
     
     
 
